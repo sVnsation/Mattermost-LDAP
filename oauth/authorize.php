@@ -15,24 +15,24 @@ $response = new OAuth2\Response();
 
 // validate the authorize request
 if (!$server->validateAuthorizeRequest($request, $response)) {
-    $response->send();
-    die;
+		$response->send();
+		die;
 }
 
 // if user is not yet authenticated, he is redirected.
 if (!isset($_SESSION['uid']))
 {
-  //store the authorize request
-  $explode_url=explode("/", strip_tags(trim($_SERVER['REQUEST_URI']))); 
-  $_SESSION['auth_page']=end($explode_url);
-  header('Location: index.php');
-  exit();
+	//store the authorize request
+	$explode_url=explode("/", strip_tags(trim($_SERVER['REQUEST_URI']))); 
+	$_SESSION['auth_page']=end($explode_url);
+	header('Location: index.php');
+	exit();
 }
 
 
 // display an authorization form
 if (empty($_POST)) {
-  exit('
+	exit('
 <!DOCTYPE html>
 <html>
 	<head>
@@ -54,11 +54,11 @@ if (empty($_POST)) {
 				</div>
 				<br>
 				<h2>Authorize Mattermost to get the following data for user "' . $_SESSION['uid'] . '":</h2>
-        <br>
+				<br>
 				<p>
-          <strong>Full Name</strong><br>
+					<strong>Full Name</strong><br>
 					<strong>E-mail</strong>
-        </p>
+				</p>
 				<br>
 
 				<form method="POST">
@@ -69,7 +69,7 @@ if (empty($_POST)) {
 		</div>
 	</body>
 </html>
-  ');
+	');
 }
 
 // print the authorization code if the user has authorized your client
@@ -78,10 +78,10 @@ $server->handleAuthorizeRequest($request, $response, $is_authorized,$_SESSION['u
 
 if ($is_authorized) 
 {
-  // This is only here so that you get to see your code in the cURL request. Otherwise, we'd redirect back to the client
-  $code = substr($response->getHttpHeader('Location'), strpos($response->getHttpHeader('Location'), 'code=')+5, 40);
-  header('Location: ' . $response->getHttpHeader('Location'));
-  exit();
+	// This is only here so that you get to see your code in the cURL request. Otherwise, we'd redirect back to the client
+	$code = substr($response->getHttpHeader('Location'), strpos($response->getHttpHeader('Location'), 'code=')+5, 40);
+	header('Location: ' . $response->getHttpHeader('Location'));
+	exit();
 }
 
 // Send message in case of error
