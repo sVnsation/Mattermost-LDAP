@@ -43,11 +43,11 @@ else
 	// Check received data length (to prevent code injection) 
 	if (strlen($_POST['user']) > 15)
  	{
-		messageShow($prompt_template, 'Username has incorrect format ... Please try again');
+		messageShow($prompt_template, 'Username has incorrect format. Please try again');
     }
     elseif (strlen($_POST['password']) > 50 || strlen($_POST['password']) <= 7)
     {
-		messageShow($prompt_template, 'Password has incorrect format ... Please try again');
+		messageShow($prompt_template, 'Password has incorrect format. Please try again');
     } 
     else
    	{
@@ -83,13 +83,13 @@ else
 		    }
 		 	else 
 		 	{
-				messageShow($prompt_template, 'Congratulation you are authenticated ! <br /><br /> However there is nothing to do here ...');
+				messageShow($prompt_template, 'Authentication successful!');
 			}
 	    }
 	    // check login on LDAP has failed. Login and password were invalid or LDAP is unreachable
 		else 
 		{
-			messageShow($prompt_template, 'Authentication failed ... Check your username and password.<br />If the error persists contact your administrator.<br /><br />');
+			messageShow($prompt_template, 'Authentication failed. Check your username and password.<br />If the error persists, contact your administrator.<br /><br />');
 		}
 	}
 }
