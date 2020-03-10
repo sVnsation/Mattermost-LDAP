@@ -53,16 +53,12 @@ if (empty($_POST)) {
 				<img src="./images/auth_icon.png" alt="authentication icon" >
 				</div>
 				<br>
-				<h2>Authorize Mattermost to get the following data:</h2>
-				<table>
-					<tr>
-						<td>
-							&nbsp; <strong>Full Name</strong><br/> 
-							&nbsp; <strong>E-mail</strong><br/>
-							&nbsp; For the user <strong>' . $_SESSION['uid'] . '</strong><br/>
-						</td>
-					</tr>
-				</table>
+				<h2>Authorize Mattermost to get the following data for user "' . $_SESSION['uid'] . '":</h2>
+        <br>
+				<p>
+          <strong>Full Name</strong><br>
+					<strong>E-mail</strong>
+        </p>
 				<br>
 
 				<form method="POST">
