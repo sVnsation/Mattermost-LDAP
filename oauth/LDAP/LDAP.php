@@ -237,7 +237,13 @@ class LDAP implements LDAPInterface
         	throw new Exception('An error has occured during ldap_get_values execution (complete name). Please check parameter of LDAP/getData.');
         }
 
-        return array("mail" => $mail[0], "cn" => $cn[0]);
+        $fullname = ldap_get_values($this->ldap_server, $data, "displayName");
+        if (!$fullname)
+        {
+        	throw new Exception('An error has occured during ldap_get_values execution (complete name). Please check parameter of LDAP/getData.');
+        }
+
+        return array("mail" => $mail[0], "cn" => $cn[0], "fullname" => $fullname[0]);
     }
 
     /*
