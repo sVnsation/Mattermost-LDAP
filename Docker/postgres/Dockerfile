@@ -4,7 +4,7 @@
 # > https://github.com/crivaledaz/Mattermost-LDAP
 
 # Start from a minimal PostgreSQL image
-FROM postgres:alpine
+FROM postgres:9.4-alpine
 
 # Copy init script in the container
 ADD ./files /docker-entrypoint-initdb.d/

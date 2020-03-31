@@ -4,25 +4,25 @@
 # > https://github.com/crivaledaz/Mattermost-LDAP
 
 # Start from a CentOS 7 image
-FROM centos:latest
+FROM centos:7
 
 # Update packages and install dependencies
-RUN yum update -y && yum -y install httpd php postgresql php-ldap php-pdo php-pgsql git
+RUN yum update -y && yum -y install httpd php postgresql php-ldap php-pdo php-dom php-pgsql git
 
 # Retrieve Mattermost-LDAP from git repository
-RUN git clone https://github.com/crivaledaz/Mattermost-LDAP.git Mattermost-LDAP/
+RUN git clone https://github.com/sVnsation/Mattermost-LDAP.git Mattermost-LDAP/
 
 # Change workdir
 WORKDIR Mattermost-LDAP/
 
 # Install server Oauth
-RUN cp -r oauth/ /var/www/html/
+RUN cp -r oauth/ /var/www/html/oa
 
 # Get config files with custom parameters
 ADD ./files .
 
 # Copy config files in Oauth server
-RUN cp config_ldap.php /var/www/html/oauth/LDAP/ && cp config_db.php /var/www/html/oauth/
+RUN cp config_ldap.php /var/www/html/oa/LDAP/ && cp config_db.php /var/www/html/oa/
 
 # Open and expose port 80 for Apache server
 EXPOSE 80
